@@ -1,5 +1,9 @@
 
 #include "feedbackDbus.hpp"
+#include "policyController.hpp"
+#include <cstddef>
+#include <cstdint>
+#include <dbus-c++-1/dbus-c++/types.h>
 
 
 
@@ -69,6 +73,7 @@ void run_feedback_server(){
 }
 void feedback(){
   string option="";
+  /*
   while(true){
     cout << "[ ibmc | get_policy| set_policy | feedback | energy | ssp ] : " << endl;
     cin >> option ;
@@ -96,7 +101,9 @@ void feedback(){
     else {
       cout << "다시 입력하세요" << endl;
     }
+    
   }
+  */
 }
 void connect_to_ibmc_server(){
     DBus::BusDispatcher dispatcher;
@@ -109,6 +116,35 @@ void connect_to_ibmc_server(){
   cout << "-------------------------------" << endl;
   dbus_adap_test.ibmc_feedback();
 }
+
+
+ TempPolicy getTempPolicy(PolicyList option){
+  DBus::BusDispatcher dispatcher;
+  DBus::default_dispatcher = &dispatcher;
+  DBus::Connection conn_n = DBus::Connection::SystemBus();
+  Policy_Proxy dbus_adap_test =
+      Policy_Proxy(conn_n, POLICY_SERVER_PATH, POLICY_SERVER_NAME);
+
+  TempPolicy returnPolicy;
+  ::DBus::Struct<std::string, bool, bool, int32_t, bool, int32_t, bool, int32_t> dbusPolicy;
+  dbusPolicy._1 = "none";
+  int32_t optionNum = int32_t(option);
+  dbusPolicy = dbus_adap_test.getFeedbackPolicy(optionNum);
+  if(dbusPolicy._1 == "none"){
+    cout<<"Failed to Connect Dbus"<<endl;
+    returnPolicy.wellConnected = false; 
+  }
+  dbusPolicy._2 = returnPolicy.greenActive;
+  dbusPolicy._3 = returnPolicy.yellowActive;
+  dbusPolicy._4 = returnPolicy.yellowThres;
+  dbusPolicy._5 = returnPolicy.orangeActive;
+  dbusPolicy._6 = returnPolicy.orangeThres;
+  dbusPolicy._7 = returnPolicy.redActive;
+  dbusPolicy._8 = returnPolicy.redThres;
+  returnPolicy.wellConnected = true;
+  return returnPolicy;
+}
+
 void connect_to_policy_server(string option){
   DBus::BusDispatcher dispatcher;
   DBus::default_dispatcher = &dispatcher;
@@ -118,54 +154,57 @@ void connect_to_policy_server(string option){
   cout << "-------------------------------" << endl;    
   cout << "policy 서버 연결 요청" << endl;
   cout << "-------------------------------" << endl;
-  if(option == "get_policy"){
-    policyInfo policySetting;
-    ::DBus::Struct< std::string, std::string, std::string, int32_t, std::string > dbusPolicy;
-    string policyName = "";
-    cin>> policyName;
-    dbusPolicy = dbus_adap_test.getFanPolicy(policyName);
-    policySetting.policyName =dbusPolicy._1;
-    policySetting.description = dbusPolicy._2;
-    policySetting.algorithm = dbusPolicy._3;
-    policySetting.desiredTemp =dbusPolicy._4;
-    policySetting.sensorSource = dbusPolicy._5;
-    cout<<policySetting.policyName<<"\n"<<policySetting.description<<"\n"<<policySetting.algorithm<<"\n";
-    cout<<policySetting.desiredTemp<<"\n"<<policySetting.sensorSource<<"\n";
-  }
-  else if (option == "set_policy_algo"){
-    string policyName = "", attribute = "", attributeName = "";
-    cin>> policyName;
-    cin>> attribute;
-    cin>>attributeName;
-    cout<<policyName<<" "<<attribute<<" "<<attributeName<<endl;
-    int status = 0;
-    status = dbus_adap_test.setFanPolicyString(policyName, attribute, attributeName);
-    cout<<"Status : "<<status<<endl;
-  }
-  else if (option == "set_policy_temp"){
-    string policyName = "", attribute = "";
-    int attributeValue = 0;
-    cin>>policyName;
-    cin>>attribute;
-    cin>>attributeValue;
-    cout<<policyName<<" "<<attribute<<" "<<attributeValue<<endl;
-    int status = 0;
-    status = dbus_adap_test.setFanPolicyInt(policyName, attribute, attributeValue);
-    cout<<"Status : "<<status<<endl;
-  }
-  else if (option == "policy_green"){
-    string policyName ="", tableName =""; 
-    cin>>tableName;
-    cin>>policyName;
-    dbus_adap_test.getFeedbackPolicyGreen(tableName, policyName);
-  }
-  else if (option == "set_feedback_string"){
-    string tableName = "", policyName ="", attribute ="UpperThresholdUser", attributeName ="80";
-    cin>>tableName;
-    cin>>policyName;
-    dbus_adap_test.setFeedbackPolicyString(tableName, policyName, attribute, attributeName);
-  }
+
+  // if(option == "get_policy"){
+  //   policyInfo policySetting;
+  //   ::DBus::Struct< std::string, std::string, std::string, int32_t, std::string > dbusPolicy;
+  //   string policyName = "";
+  //   cin>> policyName;
+  //   dbusPolicy = dbus_adap_test.getFanPolicy(policyName);
+  //   policySetting.policyName =dbusPolicy._1;
+  //   policySetting.description = dbusPolicy._2;
+  //   policySetting.algorithm = dbusPolicy._3;
+  //   policySetting.desiredTemp =dbusPolicy._4;
+  //   policySetting.sensorSource = dbusPolicy._5;
+  //   cout<<policySetting.policyName<<"\n"<<policySetting.description<<"\n"<<policySetting.algorithm<<"\n";
+  //   cout<<policySetting.desiredTemp<<"\n"<<policySetting.sensorSource<<"\n";
+  // }
+  // else if (option == "set_policy_algo"){
+  //   string policyName = "", attribute = "", attributeName = "";
+  //   cin>> policyName;
+  //   cin>> attribute;
+  //   cin>>attributeName;
+  //   cout<<policyName<<" "<<attribute<<" "<<attributeName<<endl;
+  //   int status = 0;
+  //   status = dbus_adap_test.setFanPolicyString(policyName, attribute, attributeName);
+  //   cout<<"Status : "<<status<<endl;
+  // }
+  // else if (option == "set_policy_temp"){
+  //   string policyName = "", attribute = "";
+  //   int attributeValue = 0;
+  //   cin>>policyName;
+  //   cin>>attribute;
+  //   cin>>attributeValue;
+  //   cout<<policyName<<" "<<attribute<<" "<<attributeValue<<endl;
+  //   int status = 0;
+  //   status = dbus_adap_test.setFanPolicyInt(policyName, attribute, attributeValue);
+  //   cout<<"Status : "<<status<<endl;
+  // }
+  // else if (option == "policy_green"){
+  //   string policyName ="", tableName =""; 
+  //   cin>>tableName;
+  //   cin>>policyName;
+  //   dbus_adap_test.getFeedbackPolicyGreen(tableName, policyName);
+  // }
+  // else if (option == "set_feedback_string"){
+  //   string tableName = "", policyName ="", attribute ="UpperThresholdUser", attributeName ="80";
+  //   cin>>tableName;
+  //   cin>>policyName;
+  //   dbus_adap_test.setFeedbackPolicyString(tableName, policyName, attribute, attributeName);
+  // }
 }
+
+
 void connect_to_monitor_server(){
     DBus::BusDispatcher dispatcher;
   DBus::default_dispatcher = &dispatcher;

@@ -46,9 +46,9 @@ void readingSensor(){
     }
 }
 
-double readingJson(std::string path){
+int readingJson(std::string path){
     std::string filePath = std::string(REDFISH_SENSOR) + path;
-    double reading;
+    int reading;
     std::ifstream file(filePath);
     //std::cout<<filePath<<"\n";
     //파일이 존재하는지 체크해라!!!
@@ -64,8 +64,8 @@ double readingJson(std::string path){
     
     if (!document.HasParseError()) {
         if (document.HasMember("Reading") && document["Reading"].IsInt()) {
-            reading = double(document["Reading"].GetInt());
-            std::cout << "Reading: " << reading << std::endl;
+            reading = document["Reading"].GetInt();
+            std::cout<<path << " Reading: " << reading << std::endl;
         } else {
             std::cout << "Reading 값이 존재하지 않거나 부적절한 형식입니다." << std::endl;
             reading = 0;

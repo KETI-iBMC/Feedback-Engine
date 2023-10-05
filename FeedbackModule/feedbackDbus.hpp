@@ -27,6 +27,8 @@
 #include "../Monitor/monitor_proxy.h"
 #include "./include/dbus/energy_proxy.hpp"
 #include "../SSP/ssp_proxy.h"
+#include "policyController.hpp"
+
 
 struct policyInfo{
   std::string policyName;
@@ -94,13 +96,14 @@ class Ssp_Proxy : public org::freedesktop::keti::bmc::ssp_proxy,
   ~Ssp_Proxy(){};
 };
 void connect_to_ibmc_server();
-void connect_to_policy_server(std::string option);
+void connect_to_policy_server(int option1, int option2);
 void connect_to_monitor_server();
 void connect_to_energy_server();
 void connect_to_ssp_server();
 
+TempPolicy getTempPolicy(PolicyList option);
+
 void run_feedback_server();
 void feedback();
 
-void niam(int sig);
 #endif  //__DEMO_ECHO_SERVER_H

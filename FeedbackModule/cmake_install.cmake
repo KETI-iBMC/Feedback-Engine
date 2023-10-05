@@ -1,4 +1,4 @@
-# Install script for directory: /home/keti/KETI_BMC/KETI-APP/YJ-APP/KETI-Feedback-YJ
+# Install script for directory: /home/keti/KETI_BMC/KETI-APP/YJ-APP/KETI-Feedback
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

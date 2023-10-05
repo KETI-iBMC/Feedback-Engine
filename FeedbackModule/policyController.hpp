@@ -1,29 +1,37 @@
 #pragma once
 
-struct CPUTempPolicy
-{
-    double redThres = 85;
-    double orangeThres = 75;
-    double yellowThres = 65;
+enum PolicyList{
+    CPU=1,
+    DIMM=2,
+    Cabinet=3,
+    Lm75=4,
 };
 
-struct DIMMTempPolicy
-{
-    double redThres = 85;
-    double orangeThres = 75;
-    double yellowThres = 65;
+struct TempPolicy{
+    int redThres = 85;
+    int orangeThres = 75;
+    int yellowThres = 65;
+    bool greenActive = true;
+    bool yellowActive = true;
+    bool orangeActive = true;
+    bool redActive = true;
+    bool wellConnected = false;
 };
-
 
 class PolicyController{
     public:
-        CPUTempPolicy cpuTempPolicy;
-        DIMMTempPolicy dimmTempPolicy;
+        TempPolicy cpuTempPolicy;
+        TempPolicy dimmTempPolicy;
+        TempPolicy cabinetTempPolicy;
+        TempPolicy lm75TempPolicy;
+
         PolicyController(){};
     private:
 
 
 };
 
-double* returnPolicy(int type);
+void readPolicy();
+int* returnPolicy(int type);
 void getCurrentPolicy();
+void printPolicy(TempPolicy policy);

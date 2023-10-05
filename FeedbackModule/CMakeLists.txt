@@ -35,7 +35,7 @@ link_directories(
 # Build
 add_executable(${OUTPUT} ${SOURCE_FILES})
 target_link_libraries( ${OUTPUT}
-    crypto 
+    crypto
     ssl 
     m
     rt

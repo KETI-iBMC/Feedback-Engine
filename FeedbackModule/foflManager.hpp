@@ -31,14 +31,14 @@ struct CabinetTempFOFL
     FOFLState current;
     FeedbackType type;
     bool ongoing;
-}
+};
 
 struct LM75TempFOFL
 {
     FOFLState current;
     FeedbackType type;
     bool ongoing;
-}
+};
 
 
 class FOFLManager {
@@ -62,10 +62,10 @@ class PredictModel {
 };
 
 void initFOFL();
-void changeState(FeedbackType type, double val); // 값을 통해 state 변화
+void changeState(FeedbackType type, int val); // 값을 통해 state 변화
 void redToGreenTime(FeedbackType type); // red to green 단계 시간, ibmc로 전송 예정
 void takeFanControl();
 void endFeedback(FeedbackType type); // red단계 피드백 진행 후 green 도달시 피드백 종료, ibmc로 종료 전송
-void timeCalculator(FeedbackType type, FOFLState state, bool ongoing, double val); // 상승 예정 시간 알람, ibmc로 전송 예정
-FOFLState getCurrentState(FeedbackType type, double val);
+void timeCalculator(FeedbackType type, FOFLState state, bool ongoing, int val); // 상승 예정 시간 알람, ibmc로 전송 예정
+FOFLState getCurrentState(FeedbackType type, int val);
 void getCurrentFOFL();
