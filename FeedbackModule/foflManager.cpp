@@ -2,7 +2,7 @@
 #include <iostream>
 
 FOFLManager foflManager;
-
+//
 void initFOFL(){
     //폴리시 얻어와서 초기화 필요
     foflManager.cpuTempFOFL.ongoing = false;
