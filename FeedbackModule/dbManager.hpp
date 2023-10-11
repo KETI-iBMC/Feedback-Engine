@@ -22,5 +22,5 @@ class dbManager {
 
     static void distroy_db() {phoneixInstance-> ~dbManager();} 
     bool insert_Feedback_Field (string des, );
-    bool insert_Feedback ();
+    bool insert_Feedback ();//
 };
