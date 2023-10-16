@@ -1,46 +1,51 @@
+#pragma once
+#include <string>
+#include "rapidjson/document.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/prettywriter.h" 
+#include <map>
+using namespace std;
+
 enum diskType{
     hdd,
     sdd,
     nvme
 };
 
-struct critical_Warning{
-    int total_count;
-    int available_spare;
-    int temp_threshold;
-    int nvme_subsystem;
-    int read_only;
-    int volatile_mem_backup;
-    int persistent_mem;
+struct nvmeSmartInfo{
+    diskType diskType = nvme;
+    string device_name = "";
+    string model_name = "";
+    string serial_number ="";
+    string pci_vendor = "";
+    double user_capacity = 0;
+    bool smart_status = 0;
+    int critical_warning = 0;
+    int temperature = 0;
+    int available_spare = 0;
+    int percentage_used = 0;
+    uint64_t data_units_read = 0;
+    uint64_t data_units_written = 0;
+    int controller_busy_time = 0;
+    int power_on_cycles = 0;
+    int power_on_hours = 0;
+    int unsafe_shutdowns = 0;
+    int media_errors = 0;
+    float current_capacity = 0;
+    int health_score = 0;
+    int lifespan = 0;
+    float fault_chance = 0;
 };
 
-class nvmeSmartInfo{
+class NvmeSmartManager{
+    private:
     public:
-    diskType diskType;
-    int diskNum;
-    critical_Warning critical_Warning;
-    int temperature;
-    int available_spare;
-    int available_spare_threshold;
-    int percentage_used;
-    int data_units_read;
-    int data_units_written;
-    int host_read_commands;
-    int host_write_commands;
-    int controller_busy_time;
-    int power_cycles;
-    int power_on_hours;
-    int unsafe_shutdowns;
-    int media_error;
-    int num_err_log_entries;
-    int warning_temperature_time;
-    int critical_composite_temperature_time;
-    int temperature_sensor1;
-    int temperature_sensor2;
-    int temperature_sensor3;
-    int temperature_sensor4;
+        map<string,nvmeSmartInfo> smartInfoMap;
+        map<string,nvmeSmartInfo>::iterator p;
+        NvmeSmartManager(){}
 };
 
-class nvmeSmartManager{
-    public: 
-};
+void getSmartInfo(string document);
+

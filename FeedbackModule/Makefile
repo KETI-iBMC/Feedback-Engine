@@ -202,6 +202,30 @@ main.cpp.s:
 	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+nvmeSmartManager.o: nvmeSmartManager.cpp.o
+.PHONY : nvmeSmartManager.o
+
+# target to build an object file
+nvmeSmartManager.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/nvmeSmartManager.cpp.o
+.PHONY : nvmeSmartManager.cpp.o
+
+nvmeSmartManager.i: nvmeSmartManager.cpp.i
+.PHONY : nvmeSmartManager.i
+
+# target to preprocess a source file
+nvmeSmartManager.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/nvmeSmartManager.cpp.i
+.PHONY : nvmeSmartManager.cpp.i
+
+nvmeSmartManager.s: nvmeSmartManager.cpp.s
+.PHONY : nvmeSmartManager.s
+
+# target to generate assembly for a file
+nvmeSmartManager.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/nvmeSmartManager.cpp.s
+.PHONY : nvmeSmartManager.cpp.s
+
 policyController.o: policyController.cpp.o
 .PHONY : policyController.o
 
@@ -225,6 +249,30 @@ policyController.s: policyController.cpp.s
 policyController.cpp.s:
 	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/policyController.cpp.s
 .PHONY : policyController.cpp.s
+
+restHandler.o: restHandler.cpp.o
+.PHONY : restHandler.o
+
+# target to build an object file
+restHandler.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/restHandler.cpp.o
+.PHONY : restHandler.cpp.o
+
+restHandler.i: restHandler.cpp.i
+.PHONY : restHandler.i
+
+# target to preprocess a source file
+restHandler.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/restHandler.cpp.i
+.PHONY : restHandler.cpp.i
+
+restHandler.s: restHandler.cpp.s
+.PHONY : restHandler.s
+
+# target to generate assembly for a file
+restHandler.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/restHandler.cpp.s
+.PHONY : restHandler.cpp.s
 
 sensorMonitoring.o: sensorMonitoring.cpp.o
 .PHONY : sensorMonitoring.o
@@ -268,9 +316,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... nvmeSmartManager.o"
+	@echo "... nvmeSmartManager.i"
+	@echo "... nvmeSmartManager.s"
 	@echo "... policyController.o"
 	@echo "... policyController.i"
 	@echo "... policyController.s"
+	@echo "... restHandler.o"
+	@echo "... restHandler.i"
+	@echo "... restHandler.s"
 	@echo "... sensorMonitoring.o"
 	@echo "... sensorMonitoring.i"
 	@echo "... sensorMonitoring.s"

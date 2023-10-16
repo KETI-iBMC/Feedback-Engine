@@ -12,6 +12,7 @@ void initPolicy(){
 
 void readPolicy(){
     while(true){
+        try{
         policyController.cpuTempPolicy = getTempPolicy(PolicyList::CPU);
         policyController.dimmTempPolicy = getTempPolicy(PolicyList::DIMM);
         policyController.cabinetTempPolicy = getTempPolicy(PolicyList::Cabinet);
@@ -20,6 +21,11 @@ void readPolicy(){
         printPolicy(policyController.dimmTempPolicy);
         printPolicy(policyController.cabinetTempPolicy);
         printPolicy(policyController.lm75TempPolicy);
+        }
+        catch (const DBus::Error& e){
+            break;
+            std::cout<<"DBus Error"<<e<<std::endl;
+        }
         std::this_thread::sleep_for(std::chrono::seconds(20));
     }
 }

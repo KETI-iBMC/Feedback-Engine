@@ -22,6 +22,8 @@ set (
     sensorMonitoring.cpp
     main.cpp
     feedbackDbus.cpp
+    restHandler.cpp
+    nvmeSmartManager.cpp
 )
 
 include_directories(

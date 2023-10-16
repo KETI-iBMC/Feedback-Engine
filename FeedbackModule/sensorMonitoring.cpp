@@ -9,13 +9,13 @@ void readingSensor(){
     while(true){
 
         sensorMonitoring.sensor.CPU0_DIMM1_TEMP = readingJson("/CPU0_DIMM1_TEMP.json");
-         sensorMonitoring.sensor.CPU0_DIMM2_TEMP = readingJson("/CPU0_DIMM2_TEMP.json");
-         sensorMonitoring.sensor.CPU0_DIMM3_TEMP = readingJson("/CPU0_DIMM3_TEMP.json");
-         sensorMonitoring.sensor.CPU0_DIMM4_TEMP = readingJson("/CPU0_DIMM4_TEMP.json");
-         sensorMonitoring.sensor.CPU0_DIMM5_TEMP = readingJson("/CPU0_DIMM5_TEMP.json");
-         sensorMonitoring.sensor.CPU0_DIMM6_TEMP = readingJson("/CPU0_DIMM6_TEMP.json");
-         sensorMonitoring.sensor.CPU0_DIMM7_TEMP = readingJson("/CPU0_DIMM7_TEMP.json");
-         sensorMonitoring.sensor.CPU0_DIMM8_TEMP = readingJson("/CPU0_DIMM8_TEMP.json");
+        sensorMonitoring.sensor.CPU0_DIMM2_TEMP = readingJson("/CPU0_DIMM2_TEMP.json");
+        sensorMonitoring.sensor.CPU0_DIMM3_TEMP = readingJson("/CPU0_DIMM3_TEMP.json");
+        sensorMonitoring.sensor.CPU0_DIMM4_TEMP = readingJson("/CPU0_DIMM4_TEMP.json");
+        sensorMonitoring.sensor.CPU0_DIMM5_TEMP = readingJson("/CPU0_DIMM5_TEMP.json");
+        sensorMonitoring.sensor.CPU0_DIMM6_TEMP = readingJson("/CPU0_DIMM6_TEMP.json");
+        sensorMonitoring.sensor.CPU0_DIMM7_TEMP = readingJson("/CPU0_DIMM7_TEMP.json");
+        sensorMonitoring.sensor.CPU0_DIMM8_TEMP = readingJson("/CPU0_DIMM8_TEMP.json");
         sensorMonitoring.sensor.CPU0_TEMP = readingJson("/CPU0_TEMP.json");
         sensorMonitoring.sensor.CPU1_TEMP = readingJson("/CPU1_TEMP.json");
         sensorMonitoring.sensor.CabinetTemp = readingJson("/CabinetTemp.json");
