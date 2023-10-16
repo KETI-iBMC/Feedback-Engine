@@ -33,7 +33,7 @@ struct nvmeSmartInfo{
     int power_on_hours = 0;
     int unsafe_shutdowns = 0;
     int media_errors = 0;
-    float current_capacity = 0;
+    double current_capacity = 0;
     int health_score = 0;
     int lifespan = 0;
     float fault_chance = 0;
