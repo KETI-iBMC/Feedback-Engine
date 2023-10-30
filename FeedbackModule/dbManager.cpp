@@ -1,5 +1,5 @@
 #include "dbManager.hpp"
-
+//
 
 void InitDatabase(){
     DatabaseHandler::getInstance("/conf/feedback.db").createTable("LogMonitoring");
