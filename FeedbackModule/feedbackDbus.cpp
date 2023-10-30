@@ -1,4 +1,3 @@
-
 #include "feedbackDbus.hpp"
 #include "policyController.hpp"
 #include <cstddef>
@@ -39,10 +38,18 @@ int32_t Feedback_Adaptor::feedback_ssp() {
   cout << "ssp에서 온 요청 수행 : " << endl;
   return 1;
 }
+
+void Feedback_Adaptor::postFOFL(const std::string& url, const std::string& FOFLjson){
+
+  if(url == "/faultAnalysisFoflPolicy"){
+    getPolicy(FOFLjson);
+  }
+}
+
 //-----------------------------Feedback_Adaptor클래스끝-----------------------------
-Ibmc_Proxy::Ibmc_Proxy(DBus::Connection &connection, const char *path,
-                       const char *name)
-    : DBus::ObjectProxy(connection, path, name) {}
+// Ibmc_Proxy::Ibmc_Proxy(DBus::Connection &connection, const char *path,
+//                        const char *name)
+//     : DBus::ObjectProxy(connection, path, name) {}
 //-----------------------------Ibmc_Proxy클래스끝-----------------------------
 Policy_Proxy::Policy_Proxy(DBus::Connection &connection, const char *path,
                        const char *name)
@@ -105,17 +112,17 @@ void feedback(){
   }
   */
 }
-void connect_to_ibmc_server(){
-    DBus::BusDispatcher dispatcher;
-  DBus::default_dispatcher = &dispatcher;
-  DBus::Connection conn_n = DBus::Connection::SystemBus();
-  Ibmc_Proxy dbus_adap_test =
-      Ibmc_Proxy(conn_n, IBMC_SERVER_PATH, IBMC_SERVER_NAME);
-  cout << "-------------------------------" << endl;    
-  cout << "ibmc 서버 연결 요청" << endl;
-  cout << "-------------------------------" << endl;
-  dbus_adap_test.ibmc_feedback();
-}
+// void connect_to_ibmc_server(){
+//     DBus::BusDispatcher dispatcher;
+//   DBus::default_dispatcher = &dispatcher;
+//   DBus::Connection conn_n = DBus::Connection::SystemBus();
+//   Ibmc_Proxy dbus_adap_test =
+//       Ibmc_Proxy(conn_n, IBMC_SERVER_PATH, IBMC_SERVER_NAME);
+//   cout << "-------------------------------" << endl;    
+//   cout << "ibmc 서버 연결 요청" << endl;
+//   cout << "-------------------------------" << endl;
+//   dbus_adap_test.ibmc_feedback();
+// }
 
 
  TempPolicy getTempPolicy(PolicyList option){
@@ -132,7 +139,6 @@ void connect_to_ibmc_server(){
   dbusPolicy = dbus_adap_test.getFeedbackPolicy(optionNum);
   if(dbusPolicy._1 == "none"){
     cout<<"Failed to Connect Dbus"<<endl;
-    returnPolicy.wellConnected = false; 
   }
   dbusPolicy._2 = returnPolicy.greenActive;
   dbusPolicy._3 = returnPolicy.yellowActive;
@@ -141,7 +147,6 @@ void connect_to_ibmc_server(){
   dbusPolicy._6 = returnPolicy.orangeThres;
   dbusPolicy._7 = returnPolicy.redActive;
   dbusPolicy._8 = returnPolicy.redThres;
-  returnPolicy.wellConnected = true;
   return returnPolicy;
 }
 

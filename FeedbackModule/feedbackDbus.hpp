@@ -1,6 +1,6 @@
 #ifndef __DEMO_ECHO_SERVER_H
 #define __DEMO_ECHO_SERVER_H
-
+#pragma once
 #include <cstdint>
 #include <dbus-c++-1/dbus-c++/dbus.h>
 #include <dbus-c++-1/dbus-c++/message.h>
@@ -17,12 +17,10 @@
 #include <unistd.h>
 #include <thread>
 #include <iostream>
-
-
 #include <string>
 #include "../server_path"
 #include "feedback_adaptor.h"
-#include "../KETI-IBMC-YJ/ibmc_proxy.h"
+//#include "../KETI-IBMC-YJ/ibmc_proxy.h"
 #include "./include/dbus/policy_proxy.h"
 #include "../Monitor/monitor_proxy.h"
 #include "./include/dbus/energy_proxy.hpp"
@@ -37,6 +35,7 @@ struct policyInfo{
   int32_t desiredTemp;
   std::string sensorSource;
 };
+
 class Feedback_Adaptor : public org::freedesktop::keti::bmc::feedback_adaptor,
                          public DBus::IntrospectableAdaptor,
                          public DBus::ObjectAdaptor
@@ -44,8 +43,7 @@ class Feedback_Adaptor : public org::freedesktop::keti::bmc::feedback_adaptor,
 {
  public:
   Feedback_Adaptor(DBus::Connection& connection);
-
- public:
+  void postFOFL(const std::string& url, const std::string& FOFLjson) ;
   int32_t feedback_policy();
   int32_t feedback_ibmc();
   int32_t feedback_monitor();
@@ -53,7 +51,7 @@ class Feedback_Adaptor : public org::freedesktop::keti::bmc::feedback_adaptor,
   int32_t feedback_ssp();
 
 };
-
+ /*
 class Ibmc_Proxy : public org::freedesktop::keti::bmc::ibmc_proxy,
                    public DBus::IntrospectableProxy,
                    public DBus::ObjectProxy {
@@ -62,6 +60,7 @@ class Ibmc_Proxy : public org::freedesktop::keti::bmc::ibmc_proxy,
                    const char *name);
   ~Ibmc_Proxy(){};
 };
+*/
 
 class Policy_Proxy : public org::freedesktop::keti::bmc::policy_proxy,
                    public DBus::IntrospectableProxy,
@@ -101,7 +100,8 @@ void connect_to_monitor_server();
 void connect_to_energy_server();
 void connect_to_ssp_server();
 
-TempPolicy getTempPolicy(PolicyList option);
+
+// TempPolicy getTempPolicy(PolicyList option);
 
 void run_feedback_server();
 void feedback();

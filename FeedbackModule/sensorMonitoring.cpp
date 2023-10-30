@@ -1,4 +1,5 @@
 #include "sensorMonitoring.hpp"
+#include <iostream>
 
 #define REPEAT_TIME 30
 #define REDFISH_SENSOR "/redfish/v1/Chassis/Sensors"
@@ -6,8 +7,9 @@ SensorMonitoring sensorMonitoring;
 
 void readingSensor(){
     initFOFL();
+    bool kernelPanic = false;
     while(true){
-
+        std::cout<<"\n";
         sensorMonitoring.sensor.CPU0_DIMM1_TEMP = readingJson("/CPU0_DIMM1_TEMP.json");
         sensorMonitoring.sensor.CPU0_DIMM2_TEMP = readingJson("/CPU0_DIMM2_TEMP.json");
         sensorMonitoring.sensor.CPU0_DIMM3_TEMP = readingJson("/CPU0_DIMM3_TEMP.json");
@@ -25,24 +27,24 @@ void readingSensor(){
         sensorMonitoring.sensor.LM75_TEMP3 = readingJson("/LM75_TEMP3.json");
         sensorMonitoring.sensor.LM75_TEMP4 = readingJson("/LM75_TEMP4.json");
 
-        changeState(CPUtemp, sensorMonitoring.sensor.CPU0_TEMP);
-        changeState(CPUtemp, sensorMonitoring.sensor.CPU1_TEMP);
-        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM1_TEMP);    
-        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM2_TEMP);   
-        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM3_TEMP);   
-        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM4_TEMP);   
-        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM5_TEMP);   
-        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM6_TEMP);   
-        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM7_TEMP);   
-        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM8_TEMP);   
-        changeState(Cabinettemp, sensorMonitoring.sensor.CabinetTemp);
-        changeState(LM75temp,sensorMonitoring.sensor.LM75_TEMP0);
-        changeState(LM75temp,sensorMonitoring.sensor.LM75_TEMP1); 
-        changeState(LM75temp,sensorMonitoring.sensor.LM75_TEMP2); 
-        changeState(LM75temp,sensorMonitoring.sensor.LM75_TEMP3); 
-        changeState(LM75temp,sensorMonitoring.sensor.LM75_TEMP4);          
+        changeState(CPUtemp, sensorMonitoring.sensor.CPU0_TEMP, 0);
+        changeState(CPUtemp, sensorMonitoring.sensor.CPU1_TEMP, 1);
+        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM1_TEMP, 0);    
+        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM2_TEMP, 1);   
+        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM3_TEMP, 2);   
+        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM4_TEMP, 3);   
+        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM5_TEMP,4 );   
+        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM6_TEMP,5);   
+        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM7_TEMP,6);   
+        changeState(DIMMtemp, sensorMonitoring.sensor.CPU0_DIMM8_TEMP,7);   
+        changeState(Cabinettemp, sensorMonitoring.sensor.CabinetTemp,0);
+        //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP0,0);
+        //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP1,1); 
+        //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP2,2); 
+        //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP3,3); 
+        //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP4,4);          
            
-        std::this_thread::sleep_for(std::chrono::seconds(30));
+        std::this_thread::sleep_for(std::chrono::seconds(3));
     }
 }
 
@@ -53,7 +55,7 @@ int readingJson(std::string path){
     //std::cout<<filePath<<"\n";
     //파일이 존재하는지 체크해라!!!
     if(!file.is_open()){
-        std::cerr << "~~~~~~~~CANNOT OPEN THE FILE~~~~~~~\n";
+        std::cerr << "CANNOT OPEN FILE "<<path<<"\n";
         //파일 못연다! 오류 처리 필요
         return 0;
     }
@@ -67,16 +69,14 @@ int readingJson(std::string path){
             reading = document["Reading"].GetInt();
             std::cout<<path << " Reading: " << reading << std::endl;
         } else {
-            std::cout << "Reading 값이 존재하지 않거나 부적절한 형식입니다." << std::endl;
+            std::cout << "READING VALUE IS NOT CORRECT" << std::endl;
             reading = 0;
         }
     } 
     else {
-        std::cout << "JSON 파싱 오류" << std::endl;
+        std::cout << "JSON PARSING ERROR" << std::endl;
         reading = 0;
     }
-    std::cout<<"Reading Over\n";
     file.close(); // 파일 닫기
-    std::cout<<"File Closed\n";
     return reading;
 }

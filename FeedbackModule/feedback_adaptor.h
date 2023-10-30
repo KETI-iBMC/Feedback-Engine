@@ -27,6 +27,7 @@ public:
         register_method(feedback_adaptor, feedback_monitor, _feedback_monitor_stub);
         register_method(feedback_adaptor, feedback_energy, _feedback_energy_stub);
         register_method(feedback_adaptor, feedback_ssp, _feedback_ssp_stub);
+        register_method(feedback_adaptor, postFOFL, _postFOFL_stub);
     }
 
     ::DBus::IntrospectedInterface *introspect() const 
@@ -56,6 +57,12 @@ public:
             { "result", "i", false },
             { 0, 0, 0 }
         };
+        static ::DBus::IntrospectedArgument postFOFL_args[] = 
+        {
+            { "json", "s", true },
+            { "url", "s", true },
+            { 0, 0, 0 }
+        };
         static ::DBus::IntrospectedMethod feedback_adaptor_methods[] = 
         {
             { "feedback_ibmc", feedback_ibmc_args },
@@ -63,6 +70,7 @@ public:
             { "feedback_monitor", feedback_monitor_args },
             { "feedback_energy", feedback_energy_args },
             { "feedback_ssp", feedback_ssp_args },
+            { "postFOFL", postFOFL_args },
             { 0, 0 }
         };
         static ::DBus::IntrospectedMethod feedback_adaptor_signals[] = 
@@ -99,6 +107,7 @@ public:
     virtual int32_t feedback_monitor() = 0;
     virtual int32_t feedback_energy() = 0;
     virtual int32_t feedback_ssp() = 0;
+    virtual void postFOFL(const std::string& json, const std::string& url) = 0;
 
 public:
 
@@ -157,6 +166,16 @@ private:
         ::DBus::ReturnMessage reply(call);
         ::DBus::MessageIter wi = reply.writer();
         wi << argout1;
+        return reply;
+    }
+    ::DBus::Message _postFOFL_stub(const ::DBus::CallMessage &call)
+    {
+        ::DBus::MessageIter ri = call.reader();
+
+        std::string argin1; ri >> argin1;
+        std::string argin2; ri >> argin2;
+        postFOFL(argin1, argin2);
+        ::DBus::ReturnMessage reply(call);
         return reply;
     }
 };

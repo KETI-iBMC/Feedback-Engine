@@ -1,4 +1,4 @@
-#include "rapidjson/document.h"
+#pragma once
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -24,6 +24,7 @@ struct Sensor{
     int LM75_TEMP3;
     int LM75_TEMP4;
     int CabinetTemp;
+    int Disk_Temp;
 };
 
 class SensorMonitoring{

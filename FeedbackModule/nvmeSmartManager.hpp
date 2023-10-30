@@ -1,11 +1,16 @@
 #pragma once
 #include <string>
-#include "rapidjson/document.h"
+
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/prettywriter.h" 
 #include <map>
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <cmath>
+
 using namespace std;
 
 enum diskType{
@@ -48,4 +53,5 @@ class NvmeSmartManager{
 };
 
 void getSmartInfo(string document);
-
+void storeDiskHealth(string diskchar);
+int calcScore(int value);

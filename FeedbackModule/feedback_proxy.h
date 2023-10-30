@@ -92,6 +92,17 @@ public:
         return argout;
     }
 
+    void postFOFL(const std::string& json, const std::string& url)
+    {
+        ::DBus::CallMessage call;
+        ::DBus::MessageIter wi = call.writer();
+
+        wi << json;
+        wi << url;
+        call.member("postFOFL");
+        ::DBus::Message ret = invoke_method (call);
+    }
+
 
 public:
 

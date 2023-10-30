@@ -21,11 +21,12 @@ set (
     policyController.cpp
     sensorMonitoring.cpp
     main.cpp
-    feedbackDbus.cpp
+    #feedbackDbus.cpp
     restHandler.cpp
     nvmeSmartManager.cpp
+    dbManager.cpp
 )
-
+set(DBus_INCLUDE_DIR /home/keti/KETI_BMC/KETI-APP/sysroots/armv7ahf-vfpv4d16-KETI-linux-gnueabi/usr/include/dbus-c++-1)
 include_directories(
    ${POPULATE_SDK_INCLUDE_DIR}
    ${INC_DIR}
@@ -38,21 +39,21 @@ link_directories(
 add_executable(${OUTPUT} ${SOURCE_FILES})
 target_link_libraries( ${OUTPUT}
     crypto
-    ssl 
-    m
-    rt
-    uuid
-    pthread
-    pam
-    pam_misc
-    boost_system
-    boost_log
-    boost_log_setup
-    boost_thread
+    #ssl 
+    #m
+    #rt
+    #uuid
+    #pthread
+    #pam
+    #pam_misc
+    #boost_system
+    #boost_log
+    #boost_log_setup
+    #boost_thread
     cpprest
     sqlite3
-    stdc++fs
-    gpiod
-    libdbus-c++-1.so.0
+    #stdc++fs
+    #gpiod
+    #libdbus-c++-1.so.0
 )
 

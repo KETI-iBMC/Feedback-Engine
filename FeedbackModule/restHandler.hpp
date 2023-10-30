@@ -1,3 +1,4 @@
+#pragma once
 #include "stdafx.hpp"
 #include <iostream>
 #include "nvmeSmartManager.hpp"
@@ -22,3 +23,6 @@ class Rest_Handler_Instance{
         void handle_error(pplx::task<void>& t);
         http_listener m_listener;
 };
+
+// void checkSmartRequest();
+// std::string getCurrentTime();
