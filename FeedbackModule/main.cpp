@@ -6,6 +6,7 @@
 #include "stdafx.hpp"
 #include "nvmeSmartManager.hpp"
 #include "foflManager.hpp"
+#include "foflPredict.hpp"
 
 std::unique_ptr<Rest_Handler_Instance> restHandler;
 
@@ -25,10 +26,13 @@ int main(){
     std::this_thread::sleep_for(std::chrono::seconds(5));
     std::thread t_sensorReading(readingSensor);
     std::this_thread::sleep_for(std::chrono::seconds(5));
+    std::thread predict_thread(initPredictFOFL);
+    std::this_thread::sleep_for(std::chrono::seconds(5));
     // std::thread rest_thread(checkSmartRequest);
     saveJson_thread.join();
-    t_sensorReading.join();
     policy_thread.join();
+    t_sensorReading.join();
+    predict_thread.join();
     //rest_thread.join();
 }
 

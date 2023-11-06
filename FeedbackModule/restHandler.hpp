@@ -2,6 +2,7 @@
 #include "stdafx.hpp"
 #include <iostream>
 #include "nvmeSmartManager.hpp"
+//#include "kernelPanicCheck.hpp"
 using namespace std;
 using namespace web;
 using namespace http;

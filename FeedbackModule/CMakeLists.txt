@@ -25,6 +25,7 @@ set (
     restHandler.cpp
     nvmeSmartManager.cpp
     dbManager.cpp
+    foflPredict.cpp
 )
 set(DBus_INCLUDE_DIR /home/keti/KETI_BMC/KETI-APP/sysroots/armv7ahf-vfpv4d16-KETI-linux-gnueabi/usr/include/dbus-c++-1)
 include_directories(

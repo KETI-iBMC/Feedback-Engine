@@ -1,10 +1,11 @@
 #include "sensorMonitoring.hpp"
+#include "foflPredict.hpp"
 #include <iostream>
 
 #define REPEAT_TIME 30
 #define REDFISH_SENSOR "/redfish/v1/Chassis/Sensors"
 SensorMonitoring sensorMonitoring;
-
+int predictCount = 0;
 void readingSensor(){
     initFOFL();
     bool kernelPanic = false;
@@ -42,9 +43,15 @@ void readingSensor(){
         //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP1,1); 
         //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP2,2); 
         //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP3,3); 
-        //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP4,4);          
-           
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+        //changeState(diskTemp,sensorMonitoring.sensor.LM75_TEMP4,4);
+        if(predictCount == 1){       
+            storeSensorData(sensorMonitoring.sensor.CPU1_TEMP);
+            predictCount = 0;
+        }
+        else{
+            predictCount++;
+        }
+        std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 }
 

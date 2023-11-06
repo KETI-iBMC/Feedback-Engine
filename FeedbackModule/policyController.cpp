@@ -162,7 +162,7 @@ void readPolicy(){
 
 
 
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+        std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 
     // while(true){
@@ -227,9 +227,6 @@ void printPolicy(TempPolicy tempPolicy){
 
 
 void getCurrentPolicy(){
-
-
-
 
     return;
 }
@@ -393,23 +390,187 @@ void updatefoflJson(){
     rapidjson::Document doc;
     doc.Parse(jsonData.c_str());
 
+
     if(doc.HasMember("SENSOR_INFO") && doc["SENSOR_INFO"].HasMember("SENSOR") && doc["SENSOR_INFO"]["SENSOR"].IsArray()){
         rapidjson::Value& sensorArray = doc["SENSOR_INFO"]["SENSOR"];
         for (rapidjson::SizeType i =0;i<sensorArray.Size();i++){
             if(sensorArray[i].HasMember("STATE")){
                 if(sensorArray[i]["NUMBER"] == 1){ // cpu
                     sensorArray[i]["STATE"].SetString(policyController.cpuTempPolicy[1].state.c_str(),doc.GetAllocator());
+
+                    if(!sensorArray[i].HasMember("NEXT_STATE_TIME")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.cpuTempPolicy[1].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("NEXT_STATE_TIME",value,doc.GetAllocator());
+                    }
+                    else{
+                        sensorArray[i]["NEXT_STATE_TIME"].SetString(policyController.cpuTempPolicy[1].nextStateSecond.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("FEEDBACK_STATE")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.cpuTempPolicy[1].feedbackState,doc.GetAllocator());
+                        sensorArray[i].AddMember("FEEDBACK_STATE",value,doc.GetAllocator());
+                    }
+                    else{
+                        sensorArray[i]["FEEDBACK_STATE"].SetString(policyController.cpuTempPolicy[1].feedbackState.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("RED_STATE_CAUSE")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.cpuTempPolicy[1].redCause,doc.GetAllocator());
+                        sensorArray[i].AddMember("RED_STATE_CAUSE",value,doc.GetAllocator());
+                    }
+                    else{
+                        sensorArray[i]["RED_STATE_CAUSE"].SetString(policyController.cpuTempPolicy[1].redCause.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("SUGGEST_OPTION")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.cpuTempPolicy[1].suggestOption,doc.GetAllocator());
+                        sensorArray[i].AddMember("SUGGEST_OPTION",value,doc.GetAllocator());
+                    }
+                    else{
+                        sensorArray[i]["SUGGEST_OPTION"].SetString(policyController.cpuTempPolicy[1].suggestOption.c_str(),doc.GetAllocator());
+                    }
                 }
+
                 else if(sensorArray[i]["NUMBER"] == 10){ // disk
                     sensorArray[i]["STATE"].SetString(policyController.diskTempPolicy[0].state.c_str(),doc.GetAllocator());
+
+                    if(!sensorArray[i].HasMember("NEXT_STATE_TIME")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.diskTempPolicy[0].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("NEXT_STATE_TIME",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["NEXT_STATE_TIME"].SetString(policyController.diskTempPolicy[0].nextStateSecond.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("FEEDBACK_STATE")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.diskTempPolicy[0].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("FEEDBACK_STATE",value,doc.GetAllocator());
+                       
+                    }
+                    else{
+                        sensorArray[i]["FEEDBACK_STATE"].SetString(policyController.diskTempPolicy[0].feedbackState.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("RED_STATE_CAUSE")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.diskTempPolicy[0].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("RED_STATE_CAUSE",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["RED_STATE_CAUSE"].SetString(policyController.diskTempPolicy[0].redCause.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("SUGGEST_OPTION")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.diskTempPolicy[0].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("SUGGEST_OPTION",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["SUGGEST_OPTION"].SetString(policyController.diskTempPolicy[0].suggestOption.c_str(),doc.GetAllocator());
+                    }
                 }
+
+
                 else if(sensorArray[i]["NUMBER"] == 11){ // cabubte
                     sensorArray[i]["STATE"].SetString(policyController.cabinetTempPolicy[0].state.c_str(),doc.GetAllocator());
+
+                    if(!sensorArray[i].HasMember("NEXT_STATE_TIME")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.cabinetTempPolicy[0].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("NEXT_STATE_TIME",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["NEXT_STATE_TIME"].SetString(policyController.cabinetTempPolicy[0].nextStateSecond.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("FEEDBACK_STATE")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.cabinetTempPolicy[0].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("FEEDBACK_STATE",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["FEEDBACK_STATE"].SetString(policyController.cabinetTempPolicy[0].feedbackState.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("RED_STATE_CAUSE")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.cabinetTempPolicy[0].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("RED_STATE_CAUSE",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["RED_STATE_CAUSE"].SetString(policyController.cabinetTempPolicy[0].redCause.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("SUGGEST_OPTION")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.cabinetTempPolicy[0].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("SUGGEST_OPTION",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["SUGGEST_OPTION"].SetString(policyController.cabinetTempPolicy[0].suggestOption.c_str(),doc.GetAllocator());
+                    }
                 }
+
+                
                 else{ // dimm
                     sensorArray[i]["STATE"].SetString(policyController.dimmTempPolicy[i-1].state.c_str(),doc.GetAllocator());
+
+                    if(!sensorArray[i].HasMember("NEXT_STATE_TIME")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.dimmTempPolicy[i-1].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("NEXT_STATE_TIME",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["NEXT_STATE_TIME"].SetString(policyController.dimmTempPolicy[i-1].nextStateSecond.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("FEEDBACK_STATE")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.dimmTempPolicy[i-1].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("FEEDBACK_STATE",value,doc.GetAllocator());
+                       
+                    }
+                    else{
+                        sensorArray[i]["FEEDBACK_STATE"].SetString(policyController.dimmTempPolicy[i-1].feedbackState.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("RED_STATE_CAUSE")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.dimmTempPolicy[i-1].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("RED_STATE_CAUSE",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["RED_STATE_CAUSE"].SetString(policyController.dimmTempPolicy[i-1].redCause.c_str(),doc.GetAllocator());
+                    }
+
+                    if(!sensorArray[i].HasMember("SUGGEST_OPTION")){
+                        rapidjson::Value value;
+                        value.SetString(policyController.dimmTempPolicy[i-1].nextStateSecond ,doc.GetAllocator());
+                        sensorArray[i].AddMember("SUGGEST_OPTION",value,doc.GetAllocator());
+                        
+                    }
+                    else{
+                        sensorArray[i]["SUGGEST_OPTION"].SetString(policyController.dimmTempPolicy[i-1].suggestOption.c_str(),doc.GetAllocator());
+                    }
                 }
             }
+            
+            
         }
     }
 
@@ -427,8 +588,25 @@ void updatefoflJson(){
     output.close();
 }
 
-void updateFOFL_Policy(int moduleName, int moduleNum, int state){
-        if(moduleName == 0){ // cpu
+void updateState(int moduleName, int moduleNum, int state, bool ongoing, int time){
+    if(moduleName == 0){ // cpu
+    if(time == 0){
+        policyController.cpuTempPolicy[moduleNum].nextStateSecond = "Stable";
+    }
+    else{
+    policyController.cpuTempPolicy[moduleNum].nextStateSecond = timeToString(time);}
+
+    if(ongoing == true){
+        policyController.cpuTempPolicy[moduleNum].feedbackState = "Feedback Running";
+        policyController.cpuTempPolicy[moduleNum].redCause = "Fan Module Missing";
+        policyController.cpuTempPolicy[moduleNum].suggestOption = "Adjust Fan Policy, Repair Fan Module";
+    }
+    else if(ongoing == false){
+        policyController.cpuTempPolicy[moduleNum].feedbackState = "Not Running";
+        policyController.cpuTempPolicy[moduleNum].redCause = "-";
+        policyController.cpuTempPolicy[moduleNum].suggestOption = "-";
+    }
+
     if(state == 0){
         policyController.cpuTempPolicy[moduleNum].state = "GREEN";
     }
@@ -444,6 +622,25 @@ void updateFOFL_Policy(int moduleName, int moduleNum, int state){
     }
 
     else if(moduleName == 1){ // memory
+    if(time == 0){
+        policyController.dimmTempPolicy[moduleNum].nextStateSecond = "Stable";
+    }
+    else{
+    policyController.dimmTempPolicy[moduleNum].nextStateSecond = timeToString(time);
+    }
+
+    if(ongoing == true){
+        policyController.dimmTempPolicy[moduleNum].feedbackState = "Feedback Running";
+        policyController.dimmTempPolicy[moduleNum].redCause = "Fan Module Missing";
+        policyController.dimmTempPolicy[moduleNum].suggestOption = "Adjust Fan Policy, Repair Fan Module";
+    }
+    else if(ongoing == false){
+        policyController.dimmTempPolicy[moduleNum].feedbackState = "Not Running";
+        policyController.dimmTempPolicy[moduleNum].redCause = "-";
+        policyController.dimmTempPolicy[moduleNum].suggestOption = "-";
+    }
+
+
     if(state == 0){
         policyController.dimmTempPolicy[moduleNum].state = "GREEN";
     }
@@ -459,6 +656,26 @@ void updateFOFL_Policy(int moduleName, int moduleNum, int state){
     }
 
     else if(moduleName == 2){ // storage
+    if(time == 0){
+        policyController.diskTempPolicy[moduleNum].nextStateSecond = "Stable";
+    }
+    else{
+    policyController.diskTempPolicy[moduleNum].nextStateSecond = timeToString(time);
+    }
+
+    
+    if(ongoing == true){
+        policyController.diskTempPolicy[moduleNum].feedbackState = "Feedback Running";
+        policyController.diskTempPolicy[moduleNum].redCause = "Fan Module Missing";
+        policyController.diskTempPolicy[moduleNum].suggestOption = "Adjust Fan Policy, Repair Fan Module";
+    }
+    else if(ongoing == false){
+        policyController.diskTempPolicy[moduleNum].feedbackState = "Not Running";
+        policyController.diskTempPolicy[moduleNum].redCause = "-";
+        policyController.diskTempPolicy[moduleNum].suggestOption = "-";
+    }
+
+
     if(state == 0){
         policyController.diskTempPolicy[moduleNum].state = "GREEN";
     }
@@ -474,6 +691,25 @@ void updateFOFL_Policy(int moduleName, int moduleNum, int state){
     }
 
     else if(moduleName == 4){ // cabinet
+    if(time == 0){
+        policyController.cabinetTempPolicy[moduleNum].nextStateSecond = "Stable";
+    }
+    else{
+    policyController.cabinetTempPolicy[moduleNum].nextStateSecond = timeToString(time);
+    }
+
+    if(ongoing == true){
+        policyController.cabinetTempPolicy[moduleNum].feedbackState = "Feedback Running";
+        policyController.cabinetTempPolicy[moduleNum].redCause = "Fan Module Missing";
+        policyController.cabinetTempPolicy[moduleNum].suggestOption = "Adjust Fan Policy, Repair Fan Module";
+    }
+    else if(ongoing == false){
+        policyController.cabinetTempPolicy[moduleNum].feedbackState = "Not Running";
+        policyController.cabinetTempPolicy[moduleNum].redCause = "-";
+        policyController.cabinetTempPolicy[moduleNum].suggestOption = "-";
+    }
+
+
     if(state == 0){
         policyController.cabinetTempPolicy[moduleNum].state = "GREEN";
     }
@@ -491,69 +727,9 @@ void updateFOFL_Policy(int moduleName, int moduleNum, int state){
     return;
 }
 
-void updateState(int moduleName, int moduleNum, int state){
-
-    if(moduleName == 0){ // cpu
-    if(state == 0){
-        policyController.cpuTempPolicy[moduleNum].state = "GREEN";
-    }
-    else if(state == 1){
-        policyController.cpuTempPolicy[moduleNum].state = "YELLOW";   
-    }
-    else if(state == 2){
-        policyController.cpuTempPolicy[moduleNum].state = "ORANGE";
-    }
-    else{
-        policyController.cpuTempPolicy[moduleNum].state = "RED";
-    }
-    }
-
-    else if(moduleName == 1){ // memory
-    if(state == 0){
-        policyController.dimmTempPolicy[moduleNum].state = "GREEN";
-    }
-    else if(state == 1){
-        policyController.dimmTempPolicy[moduleNum].state = "YELLOW";
-    }
-    else if(state == 2){
-        policyController.dimmTempPolicy[moduleNum].state = "ORANGE";
-    }
-    else{
-        policyController.dimmTempPolicy[moduleNum].state = "RED";
-    }
-    }
-
-    else if(moduleName == 2){ // storage
-    if(state == 0){
-        policyController.diskTempPolicy[moduleNum].state = "GREEN";
-    }
-    else if(state == 1){
-        policyController.diskTempPolicy[moduleNum].state = "YELLOW";
-    }
-    else if(state == 2){
-        policyController.diskTempPolicy[moduleNum].state = "ORANGE";
-    }
-    else{
-        policyController.diskTempPolicy[moduleNum].state = "RED";
-    }
-    }
-
-    else if(moduleName == 4){ // cabinet
-    if(state == 0){
-        policyController.cabinetTempPolicy[moduleNum].state = "GREEN";
-    }
-    else if(state == 1){
-        policyController.cabinetTempPolicy[moduleNum].state = "YELLOW";  
-    }
-    else if(state == 2){
-        policyController.cabinetTempPolicy[moduleNum].state = "ORANGE";
-    }
-    else{
-        policyController.cabinetTempPolicy[moduleNum].state = "RED";
-    }
-    }
-
-    return;
-
-
+std::string timeToString(int time){
+    int minutes = time / 60;
+    int seconds = time % 60;
+    std::string result = std::to_string(minutes) + " minutes " + std::to_string(seconds) + " seconds";
+    return result;
 }

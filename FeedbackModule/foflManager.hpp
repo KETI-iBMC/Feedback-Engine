@@ -73,6 +73,7 @@ class FOFLManager {
     CabinetTempFOFL cabinetTempFOFL[1];
     diskTempFOFL diskTempFOFL[4];
     chassisPaniceFOFL chassisFOFL[1];
+    int ongoingCount = 0;
 
     FOFLManager(){};
     private:
@@ -92,7 +93,7 @@ void changeState(FeedbackType type, int val, int num); // 값을 통해 state �
 void redToGreenTime(FeedbackType type); // red to green 단계 시간, ibmc로 전송 예정
 void takeFanControl();
 void endFeedback(FeedbackType type); // red단계 피드백 진행 후 green 도달시 피드백 종료, ibmc로 종료 전송
-void timeCalculator(FeedbackType type, FOFLState state, bool ongoing, int val); // 상승 예정 시간 알람, ibmc로 전송 예정
+int timeCalculator(FeedbackType type, FOFLState state, bool ongoing, int val, int targetVal); // 상승 예정 시간 알람, ibmc로 전송 예정
 FOFLState getCurrentState(FeedbackType type, int val);
 void getCurrentFOFL();
 std::string getCurrentTimestamp();

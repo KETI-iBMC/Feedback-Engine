@@ -24,63 +24,16 @@ void Rest_Handler_Instance::handle_put(http_request message){
 
 }
 
-// bool returnSmart(){
-//     return isSmartRequest;
-// }
 
-// void setSmart(bool t){
-//     isSmartRequest = t;
-// }
+std::string getCurrentTime(){
+    auto now = std::chrono::system_clock::now();
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+    char timestamp[20];  // 충분한 공간을 확보합니다.
 
-// bool returnKernel(){
-//     return isKernelPanic;
-// }
-
-// void setKernel(bool t){
-//     isKernelPanic= t;
-// }
-
-// void checkSmartRequest(){
-//     while(true){
-//         std::this_thread::sleep_for(std::chrono::seconds(20));
-//         std::string timestamp = getCurrentTime();
-//         bool kernel;
-//         bool smart;
-//         kernel = returnKernel();
-//         smart = returnSmart();
-//         if(kernel == true && smart == false ){ //smart false
-//             std::cout<<"HOST KERNEL PANIC\n";
-//             panicCount += 1;
-//             setKernel(true);
-//             if(panicCount > 6){
-//                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp,6,404,8,4);
-//                 panicCount = 0;
-//             }
-//         }
-//         else if(smart == true && kernel == true){ //smart true kernel true
-//             setSmart(false);
-//             setKernel(false);
-//             std::cout<<"HOST KERNEL PANIC RECOVER";
-//              DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp,6,0,8,1);
-//             panicCount = 6;
-//         }
-//         else { //smart true, kernel false
-//             setSmart(false);
-//             isSmartRequest = false;
-//             panicCount = 6;
-//         }
-//     }
-// }
-
-// std::string getCurrentTime(){
-//     auto now = std::chrono::system_clock::now();
-//     std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
-//     char timestamp[20];  // 충분한 공간을 확보합니다.
-
-//     // 형식 지정을 통해 timestamp 문자열 생성
-//     std::strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
-//     return std::string(timestamp);
-// }
+    // 형식 지정을 통해 timestamp 문자열 생성
+    std::strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
+    return std::string(timestamp);
+}
 
 void Rest_Handler_Instance::handle_post(http_request message){
     std::string uri_path = message.relative_uri().to_string();
@@ -105,7 +58,8 @@ void Rest_Handler_Instance::handle_post(http_request message){
     }
     else if(uri_path == "/smart"){
     //파일 저장
-        // setSmart(true);
+        //setSmart(true);
+
         std::string filePath = "/conf/smart.json";
         std::ofstream outputFile(filePath);
 

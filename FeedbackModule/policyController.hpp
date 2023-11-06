@@ -39,6 +39,10 @@ struct TempPolicy{
     bool orangeActive = true;
     bool redActive = true;
     bool activation = true;
+    std::string nextStateSecond;
+    std::string feedbackState;
+    std::string redCause;
+    std::string suggestOption;
 };
 
 class PolicyController{
@@ -61,6 +65,6 @@ void getPolicy(std::string json);
 int getModuleNum(const char* string);
 bool* getActivation(int type, int moduleNum);
 bool intToBool(int num);
-void updateState(int moduleName, int moduleNum, int state);
+void updateState(int moduleName, int moduleNum, int state, bool ongoing, int calTime);
 void updatefoflJson();
-void updateFOFL_Policy(int moduleName, int moduleNUm, int state);
+std::string timeToString(int time);
