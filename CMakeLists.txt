@@ -1,3 +1,4 @@
+
 # CMake version
 cmake_minimum_required(
     VERSION 3.2
@@ -7,78 +8,53 @@ cmake_minimum_required(
 # CMake system name must be something like "Linux".
 # This is important for cross-compiling.
 # Project information
-project(
-    KETI-APP
-    LANGUAGES CXX
-    VERSION 1.0.0
+
+# Variable definition
+## Execute file
+set(
+    OUTPUT
+    KETI-FeedBack
 )
-
-set(PROJECT_DIR /home/keti/KETI_BMC/KETI-APP/YJ-APP)
-set(KETI-FEED_DIR ${PROJECT_DIR}/KETI-Feedback-YJ)
-set(KETI-CLI_DIR ${PROJECT_DIR}/KETI-CLI)
-set(KETI-IBMC_DIR ${PROJECT_DIR}/KETI-IBMC)
-set(KVM_DIR ${PROJECT_DIR}/video)
-set(CHECKER_DIR ${PROJECT_DIR}/Edge_check)
-set(INC_DIR ${PROJECT_DIR}/include)
-set(DBUS_DIR ${PROJECT_DIR}/KETI-d)
-set(DBUS_INC_DIR ${PROJECT_DIR}/dbus-include)
-set(SDBUS_DIR ${PROJECT_DIR}/KETI-SDBUS)
-
-set(DBUS_INCLUDE_DIR /home/keti/BMC_SDK/output/host/build/dbus-cpp-0.9.0/include/dbus-c+11-1)
-set(DBUS_LIBRARY_DIR /home/keti/BMC_SDK/output/host/build/dbus-cpp-0.9.0/src/libs)
-
-#set(CROSS_COMPILE /home/keti/BMC_SDK/output/host/usr/bin/arm-linux-)
-set(CROSS_COMPILE /home/keti/KETI_BMC/KETI-APP/sysroots/x86_64-oesdk-linux/usr/bin/arm-openbmc-linux-gnueabi/arm-openbmc-linux-gnueabi-)
-set( CMAKE_SYSTEM_NAME Linux )
-set( CMAKE_SYSTEM_PROCESSOR arm )
-set(GCC ${CROSS_COMPILE}gcc)
-set(GPP ${CROSS_COMPILE}g++)
-
-# set(GCC /usr/bin/gcc)
-# set(GPP /usr/bin/g++)
-set(CMAKE_C_COMPILER ${GCC})
-set(CMAKE_CXX_COMPILER ${GPP})
-
-set( CMAKE_C_COMPILER_LAUNCHER  )
-set( CMAKE_CXX_COMPILER_LAUNCHER  )
-set( CMAKE_ASM_COMPILER ${GCC})
-#SSP disabled -fno-stack-protector 
-set(CMAKE_CXX_FLAGS " -Wall -w -DBOOST_LOG_DYN_LINK -Wno-psabi -fpermissive -DMG_ENABLE_SSL -DMG_ENABLE_THREADS -DMG_ENABLE_HTTP_WEBSOCKET=0 -DMG_ENABLE_HTTP_STREAMING_MULTIPART -pthread -std=c++11 ")
-set(CMAKE_CXX_FLAGS_DEBUG "-O3 -g")
-message(STATUS "Compiler")
-message(STATUS " - ID       \t: ${CMAKE_CXX_COMPILER_ID}")
-message(STATUS " - Version  \t: ${CMAKE_CXX_COMPILER_VERSION}")
-message(STATUS " - Path     \t: ${CMAKE_CXX_COMPILER}")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_DIR}/output/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_DIR}/output/libs)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_DIR}/output/libs)
-
-set(POPULATE_SDK_INCLUDE_DIR /home/keti/KETI_BMC/KETI-APP/sysroots/armv7ahf-vfpv4d16-openbmc-linux-gnueabi/usr/include)
-set(POPULATE_SDK_LIBRARY_DIR /home/keti/KETI_BMC/KETI-APP/sysroots/armv7ahf-vfpv4d16-openbmc-linux-gnueabi/usr/lib)
-
-set(STATIC_LIBS_DIR ${PROJECT_DIR}/libs)
+set (
+    SOURCE_FILES
+    foflManager.cpp
+    policyController.cpp
+    sensorMonitoring.cpp
+    main.cpp
+    #feedbackDbus.cpp
+    restHandler.cpp
+    nvmeSmartManager.cpp
+    dbManager.cpp
+    foflPredict.cpp
+)
+set(DBus_INCLUDE_DIR /home/keti/KETI_BMC/KETI-APP/sysroots/armv7ahf-vfpv4d16-KETI-linux-gnueabi/usr/include/dbus-c++-1)
 include_directories(
    ${POPULATE_SDK_INCLUDE_DIR}
    ${INC_DIR}
-   ${DBUS_INC_DIR}
 )
 ## Source
 link_directories(
     ${POPULATE_SDK_LIBRARY_DIR}
-    ${DBUS_LIBRARY_DIR}
 )
-# set(
-#     OUTPUT
-#     KETI-Feedback
-# )
-# set (
-#     SOURCE_FILES
-#     test.cpp
-# )
-# add_executable(${OUTPUT} ${SOURCE_FILES})
+# Build
+add_executable(${OUTPUT} ${SOURCE_FILES})
+target_link_libraries( ${OUTPUT}
+    crypto
+    #ssl 
+    #m
+    #rt
+    #uuid
+    #pthread
+    #pam
+    #pam_misc
+    #boost_system
+    #boost_log
+    #boost_log_setup
+    #boost_thread
+    cpprest
+    sqlite3
+    #stdc++fs
+    #gpiod
+    #libdbus-c++-1.so.0
+)
 
-
-#add_subdirectory(${STATIC_LIBS_DIR})
-#add_subdirectory(${KETI-IBMC_DIR})
-#add_subdirectory(${KETI-CLI_DIR})
-add_subdirectory(${KETI-FEED_DIR})

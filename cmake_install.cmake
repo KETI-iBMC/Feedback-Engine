@@ -1,4 +1,4 @@
-# Install script for directory: /home/keti/KETI_BMC/KETI-APP/app/KETI-SDBUS
+# Install script for directory: /home/keti/KETI_BMC/KETI-APP/YJ-APP/KETI-Feedback
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

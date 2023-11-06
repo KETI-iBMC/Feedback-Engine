@@ -77,8 +77,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/keti/KETI_BMC/KETI-APP/sysroots/x86_64-oesdk-linux/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/local/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -87,14 +87,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/keti/KETI_BMC/KETI-APP/YJ-APP/CMakeFiles /home/keti/KETI_BMC/KETI-APP/YJ-APP//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(CMAKE_COMMAND) -E cmake_progress_start /home/keti/KETI_BMC/KETI-APP/YJ-APP/CMakeFiles /home/keti/KETI_BMC/KETI-APP/YJ-APP/KETI-Feedback//CMakeFiles/progress.marks
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 KETI-Feedback/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/keti/KETI_BMC/KETI-APP/YJ-APP/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 KETI-Feedback/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,31 +103,224 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 KETI-Feedback/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 KETI-Feedback/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named KETI-FeedBack
+# Convenience name for target.
+KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/rule:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/rule
+.PHONY : KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/rule
 
-# Build rule for target.
-KETI-FeedBack: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 KETI-FeedBack
+# Convenience name for target.
+KETI-FeedBack: KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/rule
 .PHONY : KETI-FeedBack
 
 # fast build rule for target.
 KETI-FeedBack/fast:
-	$(MAKE) $(MAKESILENT) -f KETI-Feedback-YJ/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback-YJ/CMakeFiles/KETI-FeedBack.dir/build
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build
 .PHONY : KETI-FeedBack/fast
+
+dbManager.o: dbManager.cpp.o
+.PHONY : dbManager.o
+
+# target to build an object file
+dbManager.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/dbManager.cpp.o
+.PHONY : dbManager.cpp.o
+
+dbManager.i: dbManager.cpp.i
+.PHONY : dbManager.i
+
+# target to preprocess a source file
+dbManager.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/dbManager.cpp.i
+.PHONY : dbManager.cpp.i
+
+dbManager.s: dbManager.cpp.s
+.PHONY : dbManager.s
+
+# target to generate assembly for a file
+dbManager.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/dbManager.cpp.s
+.PHONY : dbManager.cpp.s
+
+foflManager.o: foflManager.cpp.o
+.PHONY : foflManager.o
+
+# target to build an object file
+foflManager.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/foflManager.cpp.o
+.PHONY : foflManager.cpp.o
+
+foflManager.i: foflManager.cpp.i
+.PHONY : foflManager.i
+
+# target to preprocess a source file
+foflManager.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/foflManager.cpp.i
+.PHONY : foflManager.cpp.i
+
+foflManager.s: foflManager.cpp.s
+.PHONY : foflManager.s
+
+# target to generate assembly for a file
+foflManager.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/foflManager.cpp.s
+.PHONY : foflManager.cpp.s
+
+foflPredict.o: foflPredict.cpp.o
+.PHONY : foflPredict.o
+
+# target to build an object file
+foflPredict.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/foflPredict.cpp.o
+.PHONY : foflPredict.cpp.o
+
+foflPredict.i: foflPredict.cpp.i
+.PHONY : foflPredict.i
+
+# target to preprocess a source file
+foflPredict.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/foflPredict.cpp.i
+.PHONY : foflPredict.cpp.i
+
+foflPredict.s: foflPredict.cpp.s
+.PHONY : foflPredict.s
+
+# target to generate assembly for a file
+foflPredict.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/foflPredict.cpp.s
+.PHONY : foflPredict.cpp.s
+
+main.o: main.cpp.o
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+nvmeSmartManager.o: nvmeSmartManager.cpp.o
+.PHONY : nvmeSmartManager.o
+
+# target to build an object file
+nvmeSmartManager.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/nvmeSmartManager.cpp.o
+.PHONY : nvmeSmartManager.cpp.o
+
+nvmeSmartManager.i: nvmeSmartManager.cpp.i
+.PHONY : nvmeSmartManager.i
+
+# target to preprocess a source file
+nvmeSmartManager.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/nvmeSmartManager.cpp.i
+.PHONY : nvmeSmartManager.cpp.i
+
+nvmeSmartManager.s: nvmeSmartManager.cpp.s
+.PHONY : nvmeSmartManager.s
+
+# target to generate assembly for a file
+nvmeSmartManager.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/nvmeSmartManager.cpp.s
+.PHONY : nvmeSmartManager.cpp.s
+
+policyController.o: policyController.cpp.o
+.PHONY : policyController.o
+
+# target to build an object file
+policyController.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/policyController.cpp.o
+.PHONY : policyController.cpp.o
+
+policyController.i: policyController.cpp.i
+.PHONY : policyController.i
+
+# target to preprocess a source file
+policyController.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/policyController.cpp.i
+.PHONY : policyController.cpp.i
+
+policyController.s: policyController.cpp.s
+.PHONY : policyController.s
+
+# target to generate assembly for a file
+policyController.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/policyController.cpp.s
+.PHONY : policyController.cpp.s
+
+restHandler.o: restHandler.cpp.o
+.PHONY : restHandler.o
+
+# target to build an object file
+restHandler.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/restHandler.cpp.o
+.PHONY : restHandler.cpp.o
+
+restHandler.i: restHandler.cpp.i
+.PHONY : restHandler.i
+
+# target to preprocess a source file
+restHandler.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/restHandler.cpp.i
+.PHONY : restHandler.cpp.i
+
+restHandler.s: restHandler.cpp.s
+.PHONY : restHandler.s
+
+# target to generate assembly for a file
+restHandler.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/restHandler.cpp.s
+.PHONY : restHandler.cpp.s
+
+sensorMonitoring.o: sensorMonitoring.cpp.o
+.PHONY : sensorMonitoring.o
+
+# target to build an object file
+sensorMonitoring.cpp.o:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/sensorMonitoring.cpp.o
+.PHONY : sensorMonitoring.cpp.o
+
+sensorMonitoring.i: sensorMonitoring.cpp.i
+.PHONY : sensorMonitoring.i
+
+# target to preprocess a source file
+sensorMonitoring.cpp.i:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/sensorMonitoring.cpp.i
+.PHONY : sensorMonitoring.cpp.i
+
+sensorMonitoring.s: sensorMonitoring.cpp.s
+.PHONY : sensorMonitoring.s
+
+# target to generate assembly for a file
+sensorMonitoring.cpp.s:
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(MAKE) $(MAKESILENT) -f KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/build.make KETI-Feedback/CMakeFiles/KETI-FeedBack.dir/sensorMonitoring.cpp.s
+.PHONY : sensorMonitoring.cpp.s
 
 # Help Target
 help:
@@ -138,6 +331,30 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... KETI-FeedBack"
+	@echo "... dbManager.o"
+	@echo "... dbManager.i"
+	@echo "... dbManager.s"
+	@echo "... foflManager.o"
+	@echo "... foflManager.i"
+	@echo "... foflManager.s"
+	@echo "... foflPredict.o"
+	@echo "... foflPredict.i"
+	@echo "... foflPredict.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
+	@echo "... nvmeSmartManager.o"
+	@echo "... nvmeSmartManager.i"
+	@echo "... nvmeSmartManager.s"
+	@echo "... policyController.o"
+	@echo "... policyController.i"
+	@echo "... policyController.s"
+	@echo "... restHandler.o"
+	@echo "... restHandler.i"
+	@echo "... restHandler.s"
+	@echo "... sensorMonitoring.o"
+	@echo "... sensorMonitoring.i"
+	@echo "... sensorMonitoring.s"
 .PHONY : help
 
 
@@ -149,6 +366,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/keti/KETI_BMC/KETI-APP/YJ-APP && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
