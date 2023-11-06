@@ -1,0 +1,97 @@
+<?xml version="1.0" ?>
+ <!-- Policy server -->
+<node name="/org/freedesktop/keti/bmc/policy">
+  <!-- policy interface -->
+  <interface name="org.freedesktop.keti.bmc.policy">
+    <!-- FanTable에서 FanPolicy가 '1' 인값   -->
+    <method name="getFan">
+      <arg type="s" name="FanName" direction="in"/>
+      <arg type="(siiiis)" name="fan_struct" direction="out"/>
+	  </method>
+    <method name="getFanTargetPolicy">
+      <arg type="s" name="FanPolicyName" direction="in"/>
+      <arg type="(is)" name="fan_struct" direction="out"/>
+	  </method>    
+    <method name="setFan">
+      <arg type="s" name="FanName" direction="in"/>
+      <arg type="s" name="FanName_string" direction="in"/>
+      <arg type="i" name="result" direction="out"/>
+	  </method>           
+    <method name="getFanPolicy">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="(sssiss)" name="fan_policy_struct" direction="out"/>
+	  </method>
+    <method name="setFanPolicyString">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="s" name="attribute" direction="in"/>
+      <arg type="s" name="attributeName" direction="in"/>
+      <arg type="i" name="result" direction="out"/>
+	  </method>
+    <method name="setFanPolicyInt">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="s" name="attribute" direction="in"/>
+      <arg type="i" name="attributeValue" direction="in"/>
+      <arg type="i" name="result" direction="out"/>
+	  </method>
+    <method name="createFanPolicy">
+      <arg type="s" name="description" direction="in"/>
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="s" name="algorithm" direction="in"/>
+      <arg type="s" name="temperatureSource" direction="in"/>
+      <arg type="i" name="desiredTemperature" direction="in"/>      
+      <arg type="i" name="result" direction="out"/>
+	  </method>    
+    <method name="deleteFanPolicy">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="i" name="result" direction="out"/>
+	  </method>  
+
+    <method name="getCPUPolicy">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="(sssii)" name="cpu_policy_struct" direction="out"/>
+	  </method>
+    <method name="setCPUPolicyString">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="s" name="attribute" direction="in"/>
+      <arg type="s" name="attributeName" direction="in"/>
+      <arg type="i" name="result" direction="out"/>
+	  </method>
+    <method name="setCPUPolicyInt">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="s" name="attribute" direction="in"/>
+      <arg type="i" name="attributeValue" direction="in"/>
+      <arg type="i" name="result" direction="out"/>
+	  </method>
+
+    <method name="getFeedbackPolicy">
+      <arg type="i" name="policyID" direction="in"/>
+      <arg type="(sbbibibi)" direction="out"/>
+	  </method>                 
+    <method name="setFeedbackPolicyString">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="s" name="attribute" direction="in"/>
+      <arg type="s" name="attributeName" direction="in"/>
+      <arg type="i" name="result" direction="out"/>	  </method>
+    <method name="setFeedbackPolicyInt">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="s" name="attribute" direction="in"/>
+      <arg type="i" name="attributeValue" direction="in"/>
+      <arg type="i" name="result" direction="out"/>
+	  </method>                 
+    <method name="createFeedbackPolicy">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="i" name="yellowTemperature" direction="in"/>
+      <arg type="i" name="orangeTemperature" direction="in"/>      
+      <arg type="i" name="redTemperature" direction="in"/>      
+      <arg type="i" name="result" direction="out"/>
+	  </method>    
+    <method name="deleteFeedbackPolicy">
+      <arg type="s" name="policyName" direction="in"/>
+      <arg type="i" name="result" direction="out"/>
+	  </method>  
+    <method name="PolicyInitialize">
+      <arg type="i" name="result" direction="out"/>
+	   </method>       
+  </interface>
+
+</node>
