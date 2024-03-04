@@ -1,4 +1,5 @@
 #include "restHandler.hpp"
+#include <sys/ipc.h>
 #include <thread>
 #include "dbManager.hpp"
 #include <chrono>
@@ -21,6 +22,52 @@ void Rest_Handler_Instance::handle_get(http_request message){
 }
 
 void Rest_Handler_Instance::handle_put(http_request message){
+
+}
+
+void getMessageData(OEM_RES_buf resData){
+
+    if(resData.msgtype == 1){
+        for(int i=0;i<MAX_RES;i++){
+            if(resData.data.data[i] != 0)
+            std::cout<<resData.data.data[i]<<std::endl;
+        }
+    }
+    else if(resData.msgtype == 2){
+        for(int i=0;i<MAX_RES;i++){
+            if(resData.data.data[i] != 0)
+            std::cout<<resData.data.data[i]<<std::endl;
+        }
+    }
+    else if(resData.msgtype == 3){
+        for(int i=0;i<MAX_RES;i++){
+            if(resData.data.data[i] != 0)
+            std::cout<<resData.data.data[i]<<std::endl;
+        }
+    }
+    else{
+        perror("UNVAILED MESSAGE TYPE\n");
+    }
+}
+
+void messageQueueHandler(){
+    while(1){
+        key_t key = 7002;
+        int msqid ;
+        OEM_RES_buf msg;
+        if((msqid = msgget(key, IPC_CREAT | 0666)) == -1){
+            perror("MESSAGE RECEIVE FAILED12\n");
+        }
+
+        if(msgrcv(msqid, &msg, sizeof(struct real_data),0,0) == -1){
+            perror("MESSAGE RECEIVE FAILED\n");
+        }
+
+        getMessageData(msg);
+    }
+}
+
+void messageQueueRequest(int msgType, unsigned char* data){
 
 }
 
@@ -56,6 +103,33 @@ void Rest_Handler_Instance::handle_post(http_request message){
         }
         cout<<"lfc post request"<<endl;
     }
+
+    else if(uri_path == "/lstm"){
+        std::string filePath = "/conf/lstm.json";
+        std::ofstream outputFile(filePath);
+        if(outputFile.is_open()){
+            outputFile<<json;
+            outputFile.close();
+            std::cout<<"Sucess Store lstm.json Data"<<std::endl;
+        }
+        else{
+           std::cerr<<"Failed to Store lstm.json Data"<<std::endl;
+        }
+        cout<<"lstm post request"<<endl;
+    }
+    else if(uri_path == "/diskGraph"){
+        std::string filePath = "/conf/diskGraph.json";
+        std::ofstream outputFile(filePath);
+        if(outputFile.is_open()){
+            outputFile<<json;
+            outputFile.close();
+            std::cout<<"Success store diskGraph.json Data"<<std::endl;
+        }
+        else{
+            std::cout<<"Failed store diskGraph.json Data"<<std::endl;
+        }
+    }
+
     else if(uri_path == "/smart"){
     //파일 저장
         //setSmart(true);

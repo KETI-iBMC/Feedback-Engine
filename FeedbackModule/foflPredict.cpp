@@ -7,7 +7,7 @@ void initPredictFOFL(){
     foflPredcit.pastTemp = 0;
     while(1){
         //storePredictData();
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        std::this_thread::sleep_for(std::chrono::seconds(60000));
     }
 }
 

@@ -15,29 +15,29 @@ void initFOFL(){
     //폴리시 얻어와서 초기화 필요
     foflManager.cpuTempFOFL -> ongoing = false;
     foflManager.cpuTempFOFL -> current = Green;
-    foflManager.cpuTempFOFL -> greenCount = 12;
-    foflManager.cpuTempFOFL -> yellowCount = 12;
-    foflManager.cpuTempFOFL -> orangeCount = 12;
-    foflManager.cpuTempFOFL -> redCount = 12;
+    foflManager.cpuTempFOFL -> greenCount = 30;
+    foflManager.cpuTempFOFL -> yellowCount = 30;
+    foflManager.cpuTempFOFL -> orangeCount = 30;
+    foflManager.cpuTempFOFL -> redCount = 30;
     foflManager.dimmTempFOFL -> current = Green;
     foflManager.dimmTempFOFL -> ongoing = false;
-    foflManager.dimmTempFOFL -> greenCount = 12;
-    foflManager.dimmTempFOFL -> yellowCount = 12;
-    foflManager.dimmTempFOFL -> orangeCount = 12;
-    foflManager.dimmTempFOFL -> redCount = 12;
+    foflManager.dimmTempFOFL -> greenCount = 30;
+    foflManager.dimmTempFOFL -> yellowCount = 30;
+    foflManager.dimmTempFOFL -> orangeCount = 30;
+    foflManager.dimmTempFOFL -> redCount = 30;
     foflManager.cabinetTempFOFL -> current = Green;
     foflManager.cabinetTempFOFL -> ongoing = false;
-    foflManager.cabinetTempFOFL -> greenCount = 12;
-    foflManager.cabinetTempFOFL -> yellowCount = 12;
-    foflManager.cabinetTempFOFL -> orangeCount = 12;
-    foflManager.cabinetTempFOFL -> redCount = 12;
+    foflManager.cabinetTempFOFL -> greenCount = 30;
+    foflManager.cabinetTempFOFL -> yellowCount = 30;
+    foflManager.cabinetTempFOFL -> orangeCount = 30;
+    foflManager.cabinetTempFOFL -> redCount = 30;
     foflManager.diskTempFOFL -> current = Green;
     foflManager.diskTempFOFL -> ongoing = false;
-    foflManager.diskTempFOFL -> greenCount = 12;
-    foflManager.diskTempFOFL -> yellowCount = 12;
-    foflManager.diskTempFOFL -> orangeCount = 12;
-    foflManager.diskTempFOFL -> redCount = 12;
-    // foflManager.chassisFOFL -> kernelPanicCount = 12;
+    foflManager.diskTempFOFL -> greenCount = 30;
+    foflManager.diskTempFOFL -> yellowCount = 30;
+    foflManager.diskTempFOFL -> orangeCount = 30;
+    foflManager.diskTempFOFL -> redCount = 30;
+    // foflManager.chassisFOFL -> kernelPanicCount = 30;
     // foflManager.chassisFOFL -> ongoing = false;
 }
 
@@ -57,12 +57,12 @@ void changeState(FeedbackType type, int val, int num){
         else if(val < Cputhres[0]){
             if(CpuActive[0] == true){
                 foflManager.cpuTempFOFL[num].greenCount += 1;
-                if(foflManager.cpuTempFOFL[num].greenCount > 12){
+                if(foflManager.cpuTempFOFL[num].greenCount > 30){
                     DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 0, num, 7, 3);
                     foflManager.cpuTempFOFL[num].greenCount = 0;
-                    foflManager.cpuTempFOFL[num].yellowCount = 12;
-                    foflManager.cpuTempFOFL[num].orangeCount = 12;
-                    foflManager.cpuTempFOFL[num].redCount = 12;
+                    foflManager.cpuTempFOFL[num].yellowCount = 30;
+                    foflManager.cpuTempFOFL[num].orangeCount = 30;
+                    foflManager.cpuTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.cpuTempFOFL[num].current = Green;
@@ -76,12 +76,12 @@ void changeState(FeedbackType type, int val, int num){
         else if(val < Cputhres[1]){
             if(CpuActive[1] == true){
                 foflManager.cpuTempFOFL[num].yellowCount += 1;
-                if(foflManager.cpuTempFOFL[num].yellowCount > 12){
-                DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 0, num, 12, 3);
-                    foflManager.cpuTempFOFL[num].greenCount = 12;
+                if(foflManager.cpuTempFOFL[num].yellowCount > 30){
+                DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 0, num, 30, 3);
+                    foflManager.cpuTempFOFL[num].greenCount = 30;
                     foflManager.cpuTempFOFL[num].yellowCount = 0;
-                    foflManager.cpuTempFOFL[num].orangeCount = 12;
-                    foflManager.cpuTempFOFL[num].redCount = 12;    
+                    foflManager.cpuTempFOFL[num].orangeCount = 30;
+                    foflManager.cpuTempFOFL[num].redCount = 30;    
                 }
             }
             foflManager.cpuTempFOFL[num].current = Yellow;
@@ -95,12 +95,12 @@ void changeState(FeedbackType type, int val, int num){
         else if (val < Cputhres[2]){
             if(CpuActive[2] == true){
                 foflManager.cpuTempFOFL[num].orangeCount += 1;
-                if(foflManager.cpuTempFOFL[num].orangeCount > 12){
+                if(foflManager.cpuTempFOFL[num].orangeCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 0, num, 5, 3);
-                    foflManager.cpuTempFOFL[num].greenCount = 12;
-                    foflManager.cpuTempFOFL[num].yellowCount = 12;
+                    foflManager.cpuTempFOFL[num].greenCount = 30;
+                    foflManager.cpuTempFOFL[num].yellowCount = 30;
                     foflManager.cpuTempFOFL[num].orangeCount = 0;
-                    foflManager.cpuTempFOFL[num].redCount = 12;   
+                    foflManager.cpuTempFOFL[num].redCount = 30;   
                 }
             }
             foflManager.cpuTempFOFL[num].current = Orange;
@@ -114,11 +114,11 @@ void changeState(FeedbackType type, int val, int num){
         else{
             if(CpuActive[3] == true){
                 foflManager.cpuTempFOFL[num].redCount += 1;
-                if(foflManager.cpuTempFOFL[num].redCount > 12){
+                if(foflManager.cpuTempFOFL[num].redCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 0, num, 1, 3);
-                    foflManager.cpuTempFOFL[num].greenCount = 12;
-                    foflManager.cpuTempFOFL[num].yellowCount = 12;
-                    foflManager.cpuTempFOFL[num].orangeCount = 12;
+                    foflManager.cpuTempFOFL[num].greenCount = 30;
+                    foflManager.cpuTempFOFL[num].yellowCount = 30;
+                    foflManager.cpuTempFOFL[num].orangeCount = 30;
                     foflManager.cpuTempFOFL[num].redCount = 0;   
                 }
             }
@@ -146,12 +146,12 @@ void changeState(FeedbackType type, int val, int num){
         else if(val < Dimmthres[0]){
             if(DimmActive[0] == true){
                 foflManager.dimmTempFOFL[num].greenCount += 1;
-                if(foflManager.dimmTempFOFL[num].greenCount > 12){
+                if(foflManager.dimmTempFOFL[num].greenCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 1, num, 7, 3);
                     foflManager.dimmTempFOFL[num].greenCount = 0;
-                    foflManager.dimmTempFOFL[num].yellowCount = 12;
-                    foflManager.dimmTempFOFL[num].orangeCount = 12;
-                    foflManager.dimmTempFOFL[num].redCount = 12;
+                    foflManager.dimmTempFOFL[num].yellowCount = 30;
+                    foflManager.dimmTempFOFL[num].orangeCount = 30;
+                    foflManager.dimmTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.dimmTempFOFL[num].current = Green;
@@ -166,12 +166,12 @@ void changeState(FeedbackType type, int val, int num){
         else if(val < Dimmthres[1]){
             if(DimmActive[1] == true){
                 foflManager.dimmTempFOFL[num].yellowCount += 1;
-                if(foflManager.dimmTempFOFL[num].yellowCount> 12){
-                DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 1, num, 12, 3);
-                    foflManager.dimmTempFOFL[num].greenCount = 12;
+                if(foflManager.dimmTempFOFL[num].yellowCount> 30){
+                DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 1, num, 30, 3);
+                    foflManager.dimmTempFOFL[num].greenCount = 30;
                     foflManager.dimmTempFOFL[num].yellowCount = 0;
-                    foflManager.dimmTempFOFL[num].orangeCount = 12;
-                    foflManager.dimmTempFOFL[num].redCount = 12;
+                    foflManager.dimmTempFOFL[num].orangeCount = 30;
+                    foflManager.dimmTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.dimmTempFOFL[num].current = Yellow;
@@ -185,12 +185,12 @@ void changeState(FeedbackType type, int val, int num){
         else if (val < Dimmthres[2]){
             if(DimmActive[2] == true){
                 foflManager.dimmTempFOFL[num].orangeCount += 1;
-                if(foflManager.dimmTempFOFL[num].orangeCount > 12){
+                if(foflManager.dimmTempFOFL[num].orangeCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 1, num, 5, 3);
-                    foflManager.dimmTempFOFL[num].greenCount = 12;
-                    foflManager.dimmTempFOFL[num].yellowCount = 12;
+                    foflManager.dimmTempFOFL[num].greenCount = 30;
+                    foflManager.dimmTempFOFL[num].yellowCount = 30;
                     foflManager.dimmTempFOFL[num].orangeCount = 0;
-                    foflManager.dimmTempFOFL[num].redCount = 12;
+                    foflManager.dimmTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.dimmTempFOFL[num].current = Orange;
@@ -204,11 +204,11 @@ void changeState(FeedbackType type, int val, int num){
         else{
             if(DimmActive[3] == true){
                 foflManager.dimmTempFOFL[num].redCount += 1;
-                if(foflManager.dimmTempFOFL[num].redCount > 12){
+                if(foflManager.dimmTempFOFL[num].redCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 1, num, 1, 3);
-                    foflManager.dimmTempFOFL[num].greenCount = 12;
-                    foflManager.dimmTempFOFL[num].yellowCount = 12;
-                    foflManager.dimmTempFOFL[num].orangeCount = 12;
+                    foflManager.dimmTempFOFL[num].greenCount = 30;
+                    foflManager.dimmTempFOFL[num].yellowCount = 30;
+                    foflManager.dimmTempFOFL[num].orangeCount = 30;
                     foflManager.dimmTempFOFL[num].redCount = 0;
                 }
             }
@@ -237,12 +237,12 @@ void changeState(FeedbackType type, int val, int num){
         else if(val < CabinetThres[0]){
             if(CabinetActive[0] == true){
                 foflManager.cabinetTempFOFL[num].greenCount += 1;
-                if(foflManager.cabinetTempFOFL[num].greenCount > 12){
+                if(foflManager.cabinetTempFOFL[num].greenCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp,4,num,7,3);
                     foflManager.cabinetTempFOFL[num].greenCount = 0;
-                    foflManager.cabinetTempFOFL[num].yellowCount = 12;
-                    foflManager.cabinetTempFOFL[num].orangeCount = 12;
-                    foflManager.cabinetTempFOFL[num].redCount = 12;
+                    foflManager.cabinetTempFOFL[num].yellowCount = 30;
+                    foflManager.cabinetTempFOFL[num].orangeCount = 30;
+                    foflManager.cabinetTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.cabinetTempFOFL[num].current = Green;
@@ -256,12 +256,12 @@ void changeState(FeedbackType type, int val, int num){
         else if(val < CabinetThres[1]){
             if(CabinetActive[1] == true){
                 foflManager.cabinetTempFOFL[num].yellowCount += 1;
-                if(foflManager.cabinetTempFOFL[num].yellowCount > 12){
-                DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp,4,num,12,3);
-                    foflManager.cabinetTempFOFL[num].greenCount = 12;
+                if(foflManager.cabinetTempFOFL[num].yellowCount > 30){
+                DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp,4,num,30,3);
+                    foflManager.cabinetTempFOFL[num].greenCount = 30;
                     foflManager.cabinetTempFOFL[num].yellowCount = 0;
-                    foflManager.cabinetTempFOFL[num].orangeCount = 12;
-                    foflManager.cabinetTempFOFL[num].redCount = 12;
+                    foflManager.cabinetTempFOFL[num].orangeCount = 30;
+                    foflManager.cabinetTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.cabinetTempFOFL[num].current = Yellow;
@@ -275,12 +275,12 @@ void changeState(FeedbackType type, int val, int num){
         else if (val < CabinetThres[2]){
             if(CabinetActive[2] == true){
                 foflManager.cabinetTempFOFL[num].orangeCount += 1;
-                if(foflManager.cabinetTempFOFL[num].orangeCount > 12){
+                if(foflManager.cabinetTempFOFL[num].orangeCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp,4,num,5,3);
-                    foflManager.cabinetTempFOFL[num].greenCount = 12;
-                    foflManager.cabinetTempFOFL[num].yellowCount = 12;
+                    foflManager.cabinetTempFOFL[num].greenCount = 30;
+                    foflManager.cabinetTempFOFL[num].yellowCount = 30;
                     foflManager.cabinetTempFOFL[num].orangeCount = 0;
-                    foflManager.cabinetTempFOFL[num].redCount = 12;
+                    foflManager.cabinetTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.cabinetTempFOFL[num].current = Orange;
@@ -294,11 +294,11 @@ void changeState(FeedbackType type, int val, int num){
         else{
             if(CabinetActive[3] == true){
                 foflManager.cabinetTempFOFL[num].redCount += 1;
-                if(foflManager.cabinetTempFOFL[num].redCount > 12){
+                if(foflManager.cabinetTempFOFL[num].redCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp,4,num,1,3);
-                    foflManager.cabinetTempFOFL[num].greenCount = 12;
-                    foflManager.cabinetTempFOFL[num].yellowCount = 12;
-                    foflManager.cabinetTempFOFL[num].orangeCount = 12;
+                    foflManager.cabinetTempFOFL[num].greenCount = 30;
+                    foflManager.cabinetTempFOFL[num].yellowCount = 30;
+                    foflManager.cabinetTempFOFL[num].orangeCount = 30;
                     foflManager.cabinetTempFOFL[num].redCount = 0;
                 }
             }
@@ -328,12 +328,12 @@ void changeState(FeedbackType type, int val, int num){
         else if(val < DiskThres[0]){
             if(DiskActive[0] == true){
                 foflManager.diskTempFOFL[num].greenCount += 1;
-                if(foflManager.diskTempFOFL[num].greenCount > 12){
+                if(foflManager.diskTempFOFL[num].greenCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 2, num, 7, 3);
                     foflManager.diskTempFOFL[num].greenCount = 0;
-                    foflManager.diskTempFOFL[num].yellowCount = 12;
-                    foflManager.diskTempFOFL[num].orangeCount = 12;
-                    foflManager.diskTempFOFL[num].redCount = 12;
+                    foflManager.diskTempFOFL[num].yellowCount = 30;
+                    foflManager.diskTempFOFL[num].orangeCount = 30;
+                    foflManager.diskTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.diskTempFOFL[num].current = Green;
@@ -347,12 +347,12 @@ void changeState(FeedbackType type, int val, int num){
         else if(val < DiskThres[1]){
             if(DiskActive[1] == true){
                 foflManager.diskTempFOFL[num].yellowCount += 1;
-                if(foflManager.diskTempFOFL[num].yellowCount > 12){
-                DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 2, num, 12, 3);
-                    foflManager.diskTempFOFL[num].greenCount = 12;
+                if(foflManager.diskTempFOFL[num].yellowCount > 30){
+                DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 2, num, 30, 3);
+                    foflManager.diskTempFOFL[num].greenCount = 30;
                     foflManager.diskTempFOFL[num].yellowCount = 0;
-                    foflManager.diskTempFOFL[num].orangeCount = 12;
-                    foflManager.diskTempFOFL[num].redCount = 12;
+                    foflManager.diskTempFOFL[num].orangeCount = 30;
+                    foflManager.diskTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.diskTempFOFL[num].current = Yellow;
@@ -366,12 +366,12 @@ void changeState(FeedbackType type, int val, int num){
         else if (val < DiskThres[2]){
             if(DiskActive[2] == true){
                 foflManager.diskTempFOFL[num].orangeCount += 1;
-                if(foflManager.diskTempFOFL[num].orangeCount > 12){
+                if(foflManager.diskTempFOFL[num].orangeCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 2, num, 5, 3);
-                    foflManager.diskTempFOFL[num].greenCount = 12;
-                    foflManager.diskTempFOFL[num].yellowCount = 12;
+                    foflManager.diskTempFOFL[num].greenCount = 30;
+                    foflManager.diskTempFOFL[num].yellowCount = 30;
                     foflManager.diskTempFOFL[num].orangeCount = 0;
-                    foflManager.diskTempFOFL[num].redCount = 12;
+                    foflManager.diskTempFOFL[num].redCount = 30;
                 }
             }
             foflManager.diskTempFOFL[num].current = Orange;
@@ -385,11 +385,11 @@ void changeState(FeedbackType type, int val, int num){
         else{
             if(DiskActive[3] == true){
                 foflManager.diskTempFOFL[num].redCount += 1;
-                if(foflManager.diskTempFOFL[num].redCount > 12){
+                if(foflManager.diskTempFOFL[num].redCount > 30){
                 DatabaseHandler::getInstance("/conf/feedback.db").insertData(timestamp, 2, num, 1, 3);
-                    foflManager.diskTempFOFL[num].greenCount = 12;
-                    foflManager.diskTempFOFL[num].yellowCount = 12;
-                    foflManager.diskTempFOFL[num].orangeCount = 12;
+                    foflManager.diskTempFOFL[num].greenCount = 30;
+                    foflManager.diskTempFOFL[num].yellowCount = 30;
+                    foflManager.diskTempFOFL[num].orangeCount = 30;
                     foflManager.diskTempFOFL[num].redCount = 0;
                 }
             }
