@@ -16,7 +16,7 @@ Rest_Handler_Instance::Rest_Handler_Instance(utility::string_t url):m_listener(u
     m_listener.support(methods::POST, std::bind(&Rest_Handler_Instance::handle_post, this, std::placeholders::_1));
     m_listener.support(methods::DEL, std::bind(&Rest_Handler_Instance::handle_delete, this, std::placeholders::_1));
 }
-
+//
 void Rest_Handler_Instance::handle_get(http_request message){
 
 }
