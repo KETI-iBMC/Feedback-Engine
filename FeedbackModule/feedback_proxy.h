@@ -25,7 +25,7 @@ public:
     }
 
 public:
-
+////
     /* properties exported by this interface */
 public:
 
