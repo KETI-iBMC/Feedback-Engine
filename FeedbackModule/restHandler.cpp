@@ -16,7 +16,7 @@ Rest_Handler_Instance::Rest_Handler_Instance(utility::string_t url):m_listener(u
     m_listener.support(methods::POST, std::bind(&Rest_Handler_Instance::handle_post, this, std::placeholders::_1));
     m_listener.support(methods::DEL, std::bind(&Rest_Handler_Instance::handle_delete, this, std::placeholders::_1));
 }
-//
+
 void Rest_Handler_Instance::handle_get(http_request message){
 
 }
@@ -24,7 +24,7 @@ void Rest_Handler_Instance::handle_get(http_request message){
 void Rest_Handler_Instance::handle_put(http_request message){
 
 }
-//123
+
 void getMessageData(OEM_RES_buf resData){
 
     if(resData.msgtype == 1){
@@ -70,7 +70,7 @@ void messageQueueHandler(){
 void messageQueueRequest(int msgType, unsigned char* data){
 
 }
-
+//
 
 std::string getCurrentTime(){
     auto now = std::chrono::system_clock::now();
